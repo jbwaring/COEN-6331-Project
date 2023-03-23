@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "lenet5"
+version = "0.1.0"
+description = "lenet5 implementation for COEN 6331 Project"
+authors = ["jbwaring <jean-baptiste@zetane.com>"]
+license = "Apache 2.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+torch = "^2.0.0"
+rich = "^13.3.2"
+torchvision = "^0.15.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
