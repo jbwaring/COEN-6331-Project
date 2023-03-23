@@ -3,25 +3,9 @@ import torch
 import torch.nn as nn
 from dataset import getMNIST
 from lenet5.nn import ConvNeuralNet
+from utils import getTorchDevice
 
 
-def getTorchDevice():
-    if not torch.backends.mps.is_available():
-        device = torch.device("cpu")
-        if not torch.backends.mps.is_built():
-            print("MPS not available because the current PyTorch install was not "
-                  "built with MPS enabled.")
-
-        else:
-            print("MPS not available because the current MacOS version is not 12.3+ "
-                  "and/or you do not have an MPS-enabled device on this machine.")
-
-    else:
-        mps_device = torch.device("mps")
-    if (mps_device is not None):
-        device = mps_device
-
-    return device
 
 
 def trainModel(num_epochs, model, train_loader, learning_rate):
@@ -72,7 +56,7 @@ if __name__ == "__main__":
     batch_size = 64
     num_classes = 10
     learning_rate = 0.001
-    num_epochs = 100
+    num_epochs = 10
     device = getTorchDevice()
     print(f"Torch using device: {device}.")
 
@@ -81,12 +65,24 @@ if __name__ == "__main__":
 
     model = ConvNeuralNet(num_classes=num_classes).to(device)
 
-    SHOULD_TRAIN = True
-
+    # Training and Testing
+    SHOULD_TRAIN = False
+    SHOULD_TEST = False
     if (SHOULD_TRAIN):
         trainModel(num_epochs=num_epochs, model=model,
                    train_loader=train_loader, learning_rate=learning_rate)
         model.save("lenet5.pth")
 
     model.load("lenet5.pth")
-    test(model=model, test_loader=test_loader)
+    if (SHOULD_TEST):
+        test(model=model, test_loader=test_loader)
+
+    # # Inference with only two first layers:
+    # with torch.no_grad():
+    #     correct = 0
+    #     total = 0
+    #     for images, labels in test_loader:
+    #         images = images.to(device)
+    #         labels = labels.to(device)
+    #         outputs = model(images)
+    #         print(outputs)

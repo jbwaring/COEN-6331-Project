@@ -11,6 +11,8 @@ python = "^3.11"
 torch = "^2.0.0"
 rich = "^13.3.2"
 torchvision = "^0.15.1"
+pip = "^23.0.1"
+matplotlib = "^3.7.1"
 
 
 [build-system]

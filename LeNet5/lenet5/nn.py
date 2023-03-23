@@ -40,6 +40,12 @@ class ConvNeuralNet(nn.Module):
         out = self.fc2(out)
         return out
 
+    def forwardWithoutLastLayer(self, x):
+        out = self.layer1(x)
+        out = self.layer2(out)
+        out = out.reshape(out.size(0), -1)
+        return out
+
     def save(self, path):
         torch.save(self.state_dict(), path)
 
