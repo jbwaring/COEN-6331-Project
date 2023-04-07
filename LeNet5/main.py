@@ -53,27 +53,27 @@ def test(model, test_loader):
 
 if __name__ == "__main__":
     print("COEN 6331 - LeNet5")
-    batch_size = 64
+    batch_size = 128
     num_classes = 10
     learning_rate = 0.001
-    num_epochs = 10
+    num_epochs = 20
     device = getTorchDevice()
     print(f"Torch using device: {device}.")
 
     train_dataset, test_dataset, train_loader, test_loader = getMNIST(
         batch_size=batch_size)
 
-    model = ConvNeuralNet(num_classes=num_classes).to(device)
+    model = ConvNeuralNet(num_classes=num_classes, use_big_hidden_layer=True).to(device)
 
     # Training and Testing
-    SHOULD_TRAIN = False
-    SHOULD_TEST = False
+    SHOULD_TRAIN = True
+    SHOULD_TEST = True
     if (SHOULD_TRAIN):
         trainModel(num_epochs=num_epochs, model=model,
                    train_loader=train_loader, learning_rate=learning_rate)
-        model.save("lenet5.pth")
+        model.save("lenet5-2048.pth")
 
-    model.load("lenet5.pth")
+    model.load("lenet5-2048.pth")
     if (SHOULD_TEST):
         test(model=model, test_loader=test_loader)
 
