@@ -1,9 +1,6 @@
 from rich import print
 import torch
 import torch.nn as nn
-import torchvision
-import torchvision.transforms as transforms
-
 
 
 class ConvNeuralNet(nn.Module):
@@ -35,8 +32,17 @@ class ConvNeuralNet(nn.Module):
                 self.load(path)
             except:
                 print("Error loading model from path")
+        self.HDCMode = False
+
+    def enableHDC(self):
+        self.HDCMode = True
+
+    def disableHDC(self):
+        self.HDCMode = False
 
     def forward(self, x):
+        if (self.HDCMode is True):
+            return self.forwardWithoutLastLayer(x)
         out = self.layer1(x)
         out = self.layer2(out)
         out = out.reshape(out.size(0), -1)
@@ -53,7 +59,9 @@ class ConvNeuralNet(nn.Module):
         if (self.USE_BIG_HIDDEN_LAYER):
             out = out.reshape(out.size(0), -1)
             out = self.fc(out)
-            out = self.relu(out)
+            out = torch.sign(out)
+            out = (out + 1) / 2  # map -1 to 0 and 1 to 1
+
         out = out.reshape(out.size(0), -1)
         return out
 
