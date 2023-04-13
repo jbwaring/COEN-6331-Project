@@ -15,6 +15,7 @@ pip = "^23.0.1"
 matplotlib = "^3.7.1"
 torch-hd = "^5.1.0"
 torchmetrics = "^0.11.4"
+invoke = "^2.0.0"
 
 
 [build-system]
