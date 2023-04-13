@@ -1,0 +1,68 @@
+digraph {
+	graph [size="12,12"]
+	node [align=left fontname=monospace fontsize=10 height=0.2 ranksep=0.1 shape=box style=filled]
+	11325368160 [label="
+ (16, 400)" fillcolor=darkolivegreen1]
+	11393145760 [label=ReshapeAliasBackward0]
+	11393144704 -> 11393145760
+	11393144704 [label=MaxPool2DWithIndicesBackward0]
+	11393144080 -> 11393144704
+	11393144080 [label=ReluBackward0]
+	11393154112 -> 11393144080
+	11393154112 [label=NativeBatchNormBackward0]
+	11393154928 -> 11393154112
+	11393154928 [label=ConvolutionBackward0]
+	11393152384 -> 11393154928
+	11393152384 [label=MaxPool2DWithIndicesBackward0]
+	11393140192 -> 11393152384
+	11393140192 [label=ReluBackward0]
+	11393144752 -> 11393140192
+	11393144752 [label=NativeBatchNormBackward0]
+	11393148064 -> 11393144752
+	11393148064 [label=ConvolutionBackward0]
+	11393146096 -> 11393148064
+	11344828832 [label="layer1.0.weight
+ (6, 1, 5, 5)" fillcolor=lightblue]
+	11344828832 -> 11393146096
+	11393146096 [label=AccumulateGrad]
+	11393146432 -> 11393148064
+	11344826912 [label="layer1.0.bias
+ (6)" fillcolor=lightblue]
+	11344826912 -> 11393146432
+	11393146432 [label=AccumulateGrad]
+	11393146624 -> 11393144752
+	11345143568 [label="layer1.1.weight
+ (6)" fillcolor=lightblue]
+	11345143568 -> 11393146624
+	11393146624 [label=AccumulateGrad]
+	11393139616 -> 11393144752
+	11345349920 [label="layer1.1.bias
+ (6)" fillcolor=lightblue]
+	11345349920 -> 11393139616
+	11393139616 [label=AccumulateGrad]
+	11393143552 -> 11393154928
+	11344961424 [label="layer2.0.weight
+ (16, 6, 5, 5)" fillcolor=lightblue]
+	11344961424 -> 11393143552
+	11393143552 [label=AccumulateGrad]
+	11393143888 -> 11393154928
+	11344522496 [label="layer2.0.bias
+ (16)" fillcolor=lightblue]
+	11344522496 -> 11393143888
+	11393143888 [label=AccumulateGrad]
+	11393150464 -> 11393154112
+	11345213184 [label="layer2.1.weight
+ (16)" fillcolor=lightblue]
+	11345213184 -> 11393150464
+	11393150464 [label=AccumulateGrad]
+	11393140000 -> 11393154112
+	11345297024 [label="layer2.1.bias
+ (16)" fillcolor=lightblue]
+	11345297024 -> 11393140000
+	11393140000 [label=AccumulateGrad]
+	11393145760 -> 11325368160
+	10767493680 [label="
+ (16, 16, 5, 5)" fillcolor=darkolivegreen3]
+	11393144704 -> 10767493680
+	10767493680 -> 11325368160 [style=dotted]
+}
